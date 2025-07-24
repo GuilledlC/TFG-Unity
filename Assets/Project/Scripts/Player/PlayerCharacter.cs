@@ -52,8 +52,8 @@ namespace Guille_dlCH.TFG.Player {
 		private Vector3 _requestedMovement;
 		private bool _requestedJump;
 		private bool _requestedSustainedJump;
-		private bool _requestedCrouch;
-		private bool _requestedSprint;
+		//private bool _requestedCrouch;
+		//private bool _requestedSprint;
 		
 		private float _timeSinceUngrounded;
 		private float _timeSinceJumpRequest;
@@ -92,10 +92,10 @@ namespace Guille_dlCH.TFG.Player {
 			_requestedSustainedJump = movementInput.JumpSustain;
 		
 			//Crouch input
-			_requestedCrouch = movementInput.Crouch;
+			//_requestedCrouch = movementInput.Crouch;
 		
 			//Sprint input
-			_requestedSprint = movementInput.Sprint;
+			//_requestedSprint = movementInput.Sprint;
 		}
 
 		public void UpdateRotation(ref Quaternion currentRotation, float deltaTime) {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Guille_dlCH.TFG {
+namespace Guille_dlCH.TFG.UI {
 	
 	[RequireComponent(typeof(CanvasGroup))]	
 	public class ShowableUI : MonoBehaviour {

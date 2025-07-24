@@ -9,6 +9,8 @@ namespace Guille_dlCH.TFG.Player {
 
 	public class Player : NetworkBehaviour {
 
+		public static string PlayerName;
+		
 		[SerializeField] private PlayerCamera playerCamera;
 		[SerializeField] private PlayerCharacter playerCharacter;
 		[SerializeField] private PlayerGun playerGun;
@@ -20,6 +22,7 @@ namespace Guille_dlCH.TFG.Player {
 			base.OnStartClient();
 
 			if (base.IsOwner) {
+				SetPlayerName(PlayerName);
 				StartCoroutine(SetupPlayer());
 			}
 			else {
@@ -70,14 +73,12 @@ namespace Guille_dlCH.TFG.Player {
 					Rotation = playerCamera.transform.rotation,
 					Move = playerActions.Move.ReadValue<Vector2>(),
 					Jump = playerActions.Jump.WasPressedThisFrame(),
-					JumpSustain = playerActions.Jump.IsPressed(),
-					Crouch = playerActions.Crouch.WasPressedThisFrame(),
-					Sprint = playerActions.Sprint.IsPressed()
+					JumpSustain = playerActions.Jump.IsPressed()
 				};
 				playerCharacter.UpdateInput(characterMovementInput);
 				
 				//Get character item input and update it
-				var characterItemInput = new CharacterItemInput {
+				var characterItemInput = new CharacterShotInput {
 					Rotation = playerCamera.transform.rotation,
 					Shoot = playerActions.Shoot.WasPressedThisFrame()
 				};
@@ -85,6 +86,16 @@ namespace Guille_dlCH.TFG.Player {
 			}
 		}
 
+		[ServerRpc]
+		private void SetPlayerName(string _name) {
+			SetPlayerNameObserver(_name);
+		}
+		
+		[ObserversRpc(BufferLast=true)]
+		private void SetPlayerNameObserver(string _name) {
+			gameObject.name = _name;
+		}
+		
 		private void LateUpdate() {
 			//This needs to be here for all players so the PlayerCamera.cs's gameobject
 			//always moves towards the camera target. It's also the reason why Player.cs

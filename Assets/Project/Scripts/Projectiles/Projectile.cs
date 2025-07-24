@@ -21,9 +21,15 @@ namespace Guille_dlCH.TFG.Projectiles {
 				//Kill player or harm prop
 			}
 		}
-		
+
 		private void Move(float deltaTime) {
-			transform.position += transform.forward * (speed * deltaTime);
+			Vector3 delta = transform.forward * (speed * deltaTime);
+			if (Physics.SphereCast(transform.position, caliber, transform.position - delta, out RaycastHit hit, delta.magnitude)) {
+				Debug.Log(hit.transform.name);
+				Despawn(this.gameObject);
+				Despawn(tracer.gameObject);
+			}
+			transform.position += delta;
 		}
 
 		public float GetSpeed() {

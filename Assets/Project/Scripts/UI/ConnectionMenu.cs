@@ -5,13 +5,14 @@ using FishNet.Transporting.Tugboat;
 using TMPro;
 using UnityEngine.UI;
 
-namespace Guille_dlCH.TFG {
+namespace Guille_dlCH.TFG.UI {
 
 	public class ConnectionMenu : ShowableMenu {
 
 		[SerializeField] private TMP_InputField ipAddress;
 		[SerializeField] private Button hostButton;
 		[SerializeField] private Button clientButton;
+		[SerializeField] private TMP_InputField name;
 
 		protected override void Awake() {
 			base.Awake();
@@ -29,6 +30,11 @@ namespace Guille_dlCH.TFG {
 		}
 
 		private void JoinServer() {
+			if (string.IsNullOrEmpty(name.text) || string.IsNullOrWhiteSpace(name.text))
+				Player.Player.PlayerName = "Player";
+			else
+				Player.Player.PlayerName = name.text;
+
 			InstanceFinder.ClientManager.StartConnection();
 			Hide();
 		}

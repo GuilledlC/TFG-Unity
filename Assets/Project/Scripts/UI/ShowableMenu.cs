@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Guille_dlCH.TFG {
+namespace Guille_dlCH.TFG.UI {
 	
 	public class ShowableMenu : ShowableUI {
 		
