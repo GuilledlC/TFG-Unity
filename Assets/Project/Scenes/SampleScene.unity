@@ -4693,7 +4693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2451679051812289044, guid: a316595006cf62c47b2fe1122bad4e07, type: 3}
       propertyPath: _latencySimulator._latency
-      value: 0
+      value: 1333
       objectReference: {fileID: 0}
     - target: {fileID: 3539844643273469439, guid: a316595006cf62c47b2fe1122bad4e07, type: 3}
       propertyPath: m_AnchorMax.y

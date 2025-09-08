@@ -106,6 +106,7 @@ namespace Guille_dlCH.TFG.Player {
 				score++;
 				scoreText.SetText(score.ToString());
 				PlayHitEffects(shot);
+				Debug.Log($"Predicted Hit {shot.Player.name}");
 			}
 			RequestServerShoot(shot, predictedHit);
 		}		
@@ -184,6 +185,7 @@ namespace Guille_dlCH.TFG.Player {
 		private void TargetHitRejected(NetworkConnection conn) {
 			score--;
 			scoreText.SetText(score.ToString());
+			Debug.Log($"Didn't Hit");
 		}
 		
 		[TargetRpc]
@@ -191,6 +193,7 @@ namespace Guille_dlCH.TFG.Player {
 			score++;
 			scoreText.SetText(score.ToString());
 			PlayHitEffects(shot);
+			Debug.Log($"Server Actually Hit {shot.Player.name}");
 		}
 
 		[ObserversRpc(ExcludeOwner = true)]
@@ -205,7 +208,7 @@ namespace Guille_dlCH.TFG.Player {
 		
 		[ObserversRpc]
 		private void ObserverLogHit(Shot shot) {
-			Debug.Log($"Hit {shot.Player.name}");
+			Debug.Log($"Observer Hit {shot.Player.name}");
 		}
 
 		#endregion
